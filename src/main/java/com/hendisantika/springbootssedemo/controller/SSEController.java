@@ -6,6 +6,7 @@ import com.hendisantika.springbootssedemo.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +29,25 @@ public class SSEController {
 
     @Autowired
     private StockPriceService stockPriceService;
+
+    @PostConstruct
+    public void initializeStockObjects() {
+
+        StockPrice stock1 = new StockPrice("ABC BANK",
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getRandomDoubleBetweenRange(5, 15),
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getStatus());
+
+        StockPrice stock2 = new StockPrice("RELIANCE",
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getRandomDoubleBetweenRange(5, 15),
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getStatus());
+
+        StockPrice stock3 = new StockPrice("KOTAK",
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getRandomDoubleBetweenRange(5, 15),
+                utils.getRandomDoubleBetweenRange(1000, 5000), utils.getStatus());
+
+        stockPriceList.add(stock1);
+        stockPriceList.add(stock2);
+        stockPriceList.add(stock3);
+    }
 
 }
