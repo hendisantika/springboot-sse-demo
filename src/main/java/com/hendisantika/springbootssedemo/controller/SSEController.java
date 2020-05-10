@@ -4,7 +4,10 @@ import com.hendisantika.springbootssedemo.model.StockPrice;
 import com.hendisantika.springbootssedemo.service.StockPriceService;
 import com.hendisantika.springbootssedemo.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -50,4 +53,9 @@ public class SSEController {
         stockPriceList.add(stock3);
     }
 
+
+    @GetMapping(value = "/stockprice", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<List<StockPrice>> getStockPrice() {
+        return stockPriceService.getStockPriceData(stockPriceList);
+    }
 }
